@@ -1,0 +1,37 @@
+
+<header>    
+    <div class="header-container">
+        <div class="logo  imglogo">
+          <a href="#"><img src="/assets/logo2.jpg" alt="E-Shop" height="100" width="100" ></a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for products...">
+            <button type="submit"><i class="bi bi-search"></i></button>
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a [routerLink]="['/User/homePage']" routerLinkActive="router-link-active" >Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a [routerLink]="['/User/Wishlist']">Wishlist</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a  [routerLink]="['/User/AddToCart']"><i class="bi bi-cart"></i><span class="cart-count">3</span></a>
+            
+            <div class="dropdown">
+                <a class="dropdown-button">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </a>
+                <div class="dropdown-content">
+                  <a [routerLink]="['/AddSupplier']"><i class="bi bi-plus"></i>Add As supplier</a>
+                  <a  [routerLink]="['/Login']" ><i class="bi bi-person"></i>Login</a>
+                  <a  [routerLink]="['/UserRegister']" ><i class="bi bi-person"></i>Register</a>
+                </div>
+              </div>
+            
+        </div>
+    </div>
+</header>
+

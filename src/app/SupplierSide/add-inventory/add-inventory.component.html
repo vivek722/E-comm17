@@ -1,0 +1,29 @@
+
+<section class="login">
+    <div class="login_box">
+        <div class="left">
+            
+            <div class="contact">
+                <form [formGroup]="InventoryData">
+                    
+                    <h1 class="Dialog-Title">Add Inventory</h1><h1 style="display: flex; justify-content: end;"><i class="bi bi-x" (click)="CloseAddInventoryDailog()"></i></h1>
+                    
+                    <select formControlName="product_id">
+                        <option value="" disabled selected>Select Product</option>
+                        <option *ngFor="let Product of ProductData" [value]="Product.id">
+                          {{ Product.productName }}
+                        </option>
+                      </select>
+
+                    <input type="text" formControlName="WarehouseName" placeholder="WarehouseName">
+                    <input type="text" formControlName="Location" placeholder="Location">
+                    <input type="number" formControlName="Quantity" placeholder="Quantity">
+                    <div class="button-container">
+                        <button class="submit" type="button" (click)="AddInventory()">Add Inventory</button>
+                        <button class="submit" type="button" (click)="CloseAddInventoryDailog()">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

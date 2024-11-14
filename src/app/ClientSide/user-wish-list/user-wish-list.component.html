@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    <h2 class="section-title text-center mb-4">{{WishListTitle}}</h2>
+    <div *ngIf="WishListData?.length > 0" class="row g-4">
+      <div class="col-md-4" *ngFor="let item of WishListData">
+        <div class="product-card">
+          <div class="product-image">
+            <!-- Show only first image as main image -->
+            <img *ngIf="item.product.productImage?.length > 0" 
+                 [src]="item.product.productImage[0].productImag" 
+                 [alt]="item.product.productName" 
+                 class="main-image">
+            
+            <div class="product-actions">
+              <button class="action-btn">
+                <i class="bi bi-cart-plus"></i>
+              </button>
+              <button class="action-btn">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            
+            <div class="discount-badge" *ngIf="item.product.productOrignalprice > item.product.productActualprice">
+              {{((item.product.productOrignalprice - item.product.productActualprice) / item.product.productOrignalprice * 100).toFixed(0)}}% OFF
+            </div>
+          </div>
+  
+          <div class="product-info">
+            <h3 class="product-name">{{item.product.productName}}</h3>
+            <div class="product-price">
+              <span class="actual-price">${{item.product.productActualprice}}</span>
+              <span class="original-price" *ngIf="item.product.productOrignalprice > item.product.productActualprice">
+                ${{item.product.productOrignalprice}}
+              </span>
+            </div>
+            <div class="product-rating">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star"></i>
+              <span class="rating-count">(4.0)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

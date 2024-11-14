@@ -1,0 +1,162 @@
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  img {
+    width: 100%;
+  }
+  
+  /* Main Container */
+  .login {
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+    background: radial-gradient(#653d84, #332042);
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  .login_box {
+    width: 90%; /* Responsive width */
+    max-width: 1050px; /* Keep max width */
+    height: auto; /* Auto height to fit content */
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 4px 22px -8px #0004;
+    display: flex;
+    overflow: hidden;
+  }
+  
+  /* Left Section */
+  .login_box .left {
+    flex: 1; /* Flexible width */
+    padding: 25px; /* Consistent padding */
+  }
+  
+  .left .contact {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    height: 100%;
+  }
+  
+  .left h3 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .left input {
+    border: none;
+    width: 100%; /* Full width */
+    margin: 15px 0;
+    border-bottom: 1px solid #4f30677d;
+    padding: 7px 9px;
+    background: transparent;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .left {
+    background: linear-gradient(-45deg, #dcd7e0, #fff);
+  }
+  
+  /* Submit Button */
+  .submit {
+    border: none;
+    padding: 15px 70px;
+    border-radius: 8px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    background: #583672;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0px 9px 15px -11px rgba(88, 54, 114, 1);
+  }
+  
+  /* Right Section */
+  .login_box .right {
+    flex: 1; /* Flexible width */
+    position: relative;
+  }
+  
+  .right {
+    background: linear-gradient(212.38deg, rgba(242, 57, 127, 0.7) 0%, rgba(175, 70, 189, 0.71) 100%), url(https://static.seattletimes.com/wp-content/uploads/2019/01/web-typing-ergonomics-1020x680.jpg);
+    color: #fff;
+  }
+  
+  .right .right-text {
+    height: 100%;
+    position: relative;
+    transform: translate(0%, 45%);
+  }
+  
+  .right-text h2 {
+    display: block;
+    text-align: center;
+    font-size: 2.5rem; /* Use rem for responsive text */
+    font-weight: 500;
+  }
+  
+  .right-text h5 {
+    display: block;
+    text-align: center;
+    font-size: 1.2rem; /* Use rem for responsive text */
+    font-weight: 400;
+  }
+  
+  .right .right-inductor {
+    position: absolute;
+    width: 70px;
+    height: 7px;
+    background: #fff0;
+    left: 50%;
+    bottom: 70px;
+    transform: translate(-50%, 0%);
+  }
+  .top_link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .login_box {
+        flex-direction: column; /* Stack left and right sections */
+        height: auto; /* Allow for height adjustment */
+    }
+  
+    .login_box .left,
+    .login_box .right {
+        width: 100%; /* Full width on smaller screens */
+    }
+  
+    .right-text h2 {
+        font-size: 2rem; /* Smaller text on mobile */
+    }
+  
+    .right-text h5 {
+        font-size: 1rem; /* Smaller text on mobile */
+    }
+  
+    .submit {
+        padding: 15px 30px; /* Adjust button size */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .login {
+        height: auto; /* Allow for height adjustment */
+    }
+  
+    .left input {
+        font-size: 12px; /* Smaller input text */
+    }
+  }
+  

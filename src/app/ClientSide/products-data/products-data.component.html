@@ -1,0 +1,53 @@
+
+<div class="container mt-5">
+    <h2 class="section-title text-center mb-4">{{Title}}</h2>
+    <div *ngIf="products?.length > 0" class="row g-4">
+      <div class="col-md-4" *ngFor="let product of products">
+        <div class="product-card">
+          <div class="product-image">
+            <!-- Show only first image as main image -->
+            <img *ngIf="product.productImage?.length > 0" 
+                 [src]="product.productImage[0].productImag" 
+                 [alt]="product.productName" 
+                 class="main-image">
+            
+            <div class="product-actions">
+              <button class="action-btn" 
+                      (click)="AddToWishlist(product.id)"
+                      [ngClass]="{'wishlist-active':this.WishData}">
+                <i class="bi bi-heart"></i>
+              </button>
+              <button class="action-btn" (click)="AddToCart(product.id)">
+                <i class="bi bi-cart-plus" ></i>
+              </button>
+              <button class="action-btn">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            
+            <div class="discount-badge" *ngIf="product.productOrignalprice > product.productActualprice">
+              {{((product.productOrignalprice - product.productActualprice) / product.productOrignalprice * 100).toFixed(0)}}% OFF
+            </div>
+          </div>
+  
+          <div class="product-info">
+            <h3 class="product-name">{{product.productName}}</h3>
+            <div class="product-price">
+              <span class="actual-price">${{product.productActualprice}}</span>
+              <span class="original-price" *ngIf="product.productOrignalprice > product.productActualprice">
+                ${{product.productOrignalprice}}
+              </span>
+            </div>
+            <div class="product-rating">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star"></i>
+              <span class="rating-count">(4.0)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,58 @@
+<div class="cart-container">
+    <!-- Cart Header -->
+    <h2 class="cart-title">Your Shopping Cart</h2>
+  
+    <!-- Cart Items Section -->
+    <div class="cart-items">
+      <!-- Item 1 -->
+      <mat-card class="cart-item">
+        <mat-card-header>
+          <mat-card-title>Product Name</mat-card-title>
+          <mat-card-subtitle>$29.99</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Brief description of the product goes here.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="quantity-controls">
+            <button mat-mini-fab color="primary" (click)="decreaseQuantity()">-</button>
+            <span class="quantity">{{ quantity }}</span>
+            <button mat-mini-fab color="primary" (click)="increaseQuantity()">+</button>
+          </div>
+          <button mat-button color="warn" (click)="removeItem()">Remove</button>
+        </mat-card-actions>
+      </mat-card>
+  
+      <!-- Repeat for additional items if needed -->
+    </div>
+  
+    <!-- Order Summary Section -->
+    <div class="order-summary">
+      <mat-card class="summary-card">
+        <mat-card-header>
+          <mat-card-title>Order Summary</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <span>Subtotal:</span>
+              <span class="total">${{ subtotal }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span>Tax:</span>
+              <span class="total">${{ tax }}</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <span><strong>Total:</strong></span>
+              <span class="total"><strong>${{ totalAmount }}</strong></span>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent" (click)="placeOrder()">Proceed to Checkout</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  

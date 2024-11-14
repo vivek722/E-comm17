@@ -1,0 +1,64 @@
+
+<div class="app-main__outer"> 
+    <div class="app-main__inner">
+      <div>
+        <h2>Product Details</h2>
+        <div class="open-model"><button mat-raised-button (click)="AddProduct()">Add Product</button></div>
+        <table  mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+               class="mat-elevation-z8">
+          <!-- Position Column -->
+          <ng-container matColumnDef="Product Image">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+              Product Image
+            </th>
+            <td mat-cell *matCellDef="let element"> 
+              <ng-container *ngFor="let image of element.productImage">
+              <img [src]="image.productImag" alt="Product Image" style="width: 150px; height: auto; margin-right: 5px;">
+            </ng-container></td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Product Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+              Product Name
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="Product Description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+              Product Description
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.productDesc}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Product Orignal Price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+              Product Orignal Price
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.productOrignalprice}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Product Offer Price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+              Product Offer Price
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.productActualprice}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+              Action
+            </th>
+            <td mat-cell *matCellDef="let element">  </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[4, 8, 12]" showFirstLastButtons> 
+        </mat-paginator>
+        </div>
+        
+   </div> 
+  </div>
+  

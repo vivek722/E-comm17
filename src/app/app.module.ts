@@ -3,14 +3,21 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    ToastrModule.forRoot({ 
+      timeOut: 1000,
+      positionClass: 'toast-center-center',
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     provideClientHydration()
