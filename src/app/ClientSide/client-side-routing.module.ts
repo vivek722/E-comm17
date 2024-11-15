@@ -17,6 +17,7 @@ const routes: Routes = [
       ]
     },
     {path:'AddSupplier',component:SupplierRegistrationComponent},
+    {path:'login',loadChildren: () => import('../Authentication/authentication.module').then(m => m.AuthenticationModule)},
 ];
 
 @NgModule({

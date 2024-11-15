@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { SharedModule } from "../Shared/shared.module";
+import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 @NgModule({
   declarations: [
     SupplierRegistrationComponent,
@@ -30,7 +31,8 @@ import { SharedModule } from "../Shared/shared.module";
     MatButtonModule,
     MatListModule,
     MatDividerModule,
-    SharedModule
+    SharedModule,
+    MatIconModule
   ]
 })
 export class ClientSideModule { }

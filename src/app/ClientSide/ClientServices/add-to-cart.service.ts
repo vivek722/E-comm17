@@ -11,10 +11,10 @@ export class AddToCartService {
   AddToCart_URL =endpoints.AddToCart
   constructor(private http:HttpClient) { }
 
-  GetAllCartProducts():Observable<AddToCart>
-  {
-    return this.http.get<AddToCart>(`${this.AddToCart_URL}/GetAllCartProducts`);
-  }
+    GetAllCartProducts(id:number):Observable<AddToCart>
+    {
+      return this.http.get<AddToCart>(`${this.AddToCart_URL}/GetAllCartProducts/${id}`);
+    }
   AddCartProduct(product:AddToCart):Observable<AddToCart>
   {
     return this.http.post<AddToCart>(`${this.AddToCart_URL}/AddCartProduct`,product);

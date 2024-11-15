@@ -10,7 +10,6 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   
   Auth_Url = endpoints.AUTH;
   private userSubject: BehaviorSubject<Login | null> = new BehaviorSubject<Login | null>(null);
@@ -56,4 +55,6 @@ export class AuthenticationService {
         return null;
       }
     }
+
+    
 }

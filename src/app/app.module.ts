@@ -14,8 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     AppRoutingModule,
     ToastrModule.forRoot({ 
-      timeOut: 1000,
-      positionClass: 'toast-center-center',
+      timeOut: 3000,
+      positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
   ],
