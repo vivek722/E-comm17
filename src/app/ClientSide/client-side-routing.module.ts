@@ -5,19 +5,20 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserWishListComponent } from './user-wish-list/user-wish-list.component';
 import { UserAddToCartComponent } from './user-add-to-cart/user-add-to-cart.component';
 import { SupplierRegistrationComponent } from './supplier-registration/supplier-registration.component';
+import { CanActivate } from '../Authentication/auth-guardng.guard';
 
 const routes: Routes = [
   {path:'',redirectTo:'homePage',pathMatch:'full'},
 
   {path:'',component:UserHomeDesignComponent,
       children:[
-        {path:'homePage',component:UserHomeComponent},
+        {path:'homePage',component:UserHomeComponent,canActivate:[CanActivate]},
         {path:'Wishlist',component:UserWishListComponent},
         {path:'AddToCart',component:UserAddToCartComponent},
       ]
     },
     {path:'AddSupplier',component:SupplierRegistrationComponent},
-    {path:'login',loadChildren: () => import('../Authentication/authentication.module').then(m => m.AuthenticationModule)},
+    {path:'auth',loadChildren: () => import('../Authentication/authentication.module').then(m => m.AuthenticationModule)},
 ];
 
 @NgModule({

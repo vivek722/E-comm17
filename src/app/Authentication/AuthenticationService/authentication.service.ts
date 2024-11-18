@@ -10,10 +10,14 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  
+
+ 
+ 
+  tokenExpirationTimer:any;
   Auth_Url = endpoints.AUTH;
   private userSubject: BehaviorSubject<Login | null> = new BehaviorSubject<Login | null>(null);
   User : Observable<Login>= new  Observable<Login>; 
+  tostr: any;
   constructor( private router: Router,
     private http: HttpClient,
 ) { }
@@ -31,19 +35,23 @@ export class AuthenticationService {
       );
     }
     logout():void{
-      localStorage.removeItem('user');
+      this.removeToken();
       this.userSubject.next(null);
       this.router.navigate(['/Login']);
+      this.tostr.success('Logout Successfully.','Logout',{
+        closeButton:true
+      });
     }
-    Userislogin():boolean{
-      return localStorage.getItem('user')?true:false;
+    Userislogin(){
+      let token = localStorage.getItem('user');
+      return token ? token : null;
     }
-    getUserRoleId(): string | null {
+    getToken(): string | null {
       const token = localStorage.getItem('user');
       if (token) {
         const decodedToken = this.getDecodedAccessToken(token);
         localStorage.setItem('user',JSON.stringify(decodedToken))
-        return decodedToken ? decodedToken.Role : null; 
+        return decodedToken.Role; 
       }
       return null;
     }
@@ -51,10 +59,35 @@ export class AuthenticationService {
       try {
         return jwtDecode(token);
       } catch (Error) {
-        console.error("Token decoding error:", Error);
         return null;
       }
     }
 
-    
+    resetTokenTimer(expirationTime:number)
+    {
+      this.clearTokenTimer();
+      const now = new Date().getTime();
+      const expiresIn = expirationTime - now;
+      this.tokenExpirationTimer = setTimeout(() =>{
+        this.autoLogout();
+      }, expiresIn);
+    }
+
+  autoLogout()
+    {
+      this.removeToken();
+      this.router.navigateByUrl('/login');
+      this.tostr.error('Your Session Expired.Please Login Again','Logout',{
+        closeButton:true
+      });
+    }
+  clearTokenTimer()
+  {
+    clearTimeout(this.tokenExpirationTimer);
+  }
+  
+  removeToken()
+  {
+    localStorage.removeItem('user');
+  }
 }

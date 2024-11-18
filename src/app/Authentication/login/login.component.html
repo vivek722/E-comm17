@@ -8,7 +8,7 @@
                     <input type="text" formControlName="UserName" placeholder="USERNAME">
                     <input type="password" formControlName="Password" placeholder="PASSWORD">
                     <button class="submit" type="button" (click)="LoginUser()" >Login</button>
-                    <div class="top_link"><h4>Create New Account  <a [routerLink]="['UserRegister']">Sign Up</a></h4></div>
+                    <div class="top_link"><h4>Create New Account  <a [routerLink]="['/UserHome/auth/UserRegister']">Sign Up</a></h4></div>
                 </form>
             </div>
         </div>

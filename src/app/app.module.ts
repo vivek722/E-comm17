@@ -4,7 +4,9 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import {  HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoggingInterceptor } from './Authentication/logging.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,12 @@ import { HttpClientModule } from '@angular/common/http';
     }),
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoggingInterceptor, 
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

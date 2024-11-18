@@ -2,7 +2,8 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { AuthenticationService } from './AuthenticationService/authentication.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { Injectable } from '@angular/core';
+@Injectable() 
 export class LoggingInterceptor implements HttpInterceptor {
   constructor(private AuthService:AuthenticationService,private Toster:ToastrService) {}
 
@@ -17,16 +18,16 @@ export class LoggingInterceptor implements HttpInterceptor {
       });
     }
     return next.handle(request).pipe(
-      // tap(() => {
-      //   if(Token)
-      //     {
-      //       const expirationTime = this.getExpirationTime(token);
-      //       if(expirationTime)
-      //       {
-      //           this.AuthService.resetTokenTimer(expirationTime)
-      //       }
-      //     }
-      // }),
+      tap(() => {
+        if(Token)
+          {
+            const expirationTime = this.getExpirationTime(Token);
+            if(expirationTime)
+            {
+                this.AuthService.resetTokenTimer(expirationTime)
+            }
+          }
+      }),
       catchError(err=>{
         if(err)
           {
@@ -38,7 +39,7 @@ export class LoggingInterceptor implements HttpInterceptor {
                 });
                 break;
               case 500:
-                this.Toster.error("User Already Exists!!",err.status.toString(),{
+                this.Toster.error(err.error.message,err.status.toString(),{
                   closeButton:true
                 });
                 break;
@@ -62,4 +63,5 @@ export class LoggingInterceptor implements HttpInterceptor {
       return null;
     }
   }
+  
 }

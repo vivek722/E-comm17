@@ -32,7 +32,7 @@ export class UserAddToCartComponent implements OnInit  {
       this.addToCartService.DeleteProductInCart(products_id).subscribe((res: any) => {
         if(res) {
           this.toster.success("Item removed successfully");
-          this.cartItems = this.cartItems.filter((item: { ProductId: number; }) => item.ProductId!== products_id);
+          this.getAllCartItems();
         }
       });
     }

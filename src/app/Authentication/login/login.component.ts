@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
       this.authservice.login(LoginData).subscribe((res: any) => {
       if(res != null)
       {
-       var RoleName = this.authservice.getUserRoleId()
+       var RoleName = this.authservice.getToken()
       if(RoleName == "Customer")
       {
-        this.route.navigate(['Login/UserHomePage']);
+        this.route.navigate(['/UserHome/homePage']);
       }
       else if(RoleName == "Supplier")
       {

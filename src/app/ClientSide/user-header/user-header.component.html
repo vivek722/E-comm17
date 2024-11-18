@@ -10,24 +10,27 @@
         </div>
         <nav class="nav-links">
             <ul>
-                <li><a [routerLink]="['/Login/UserHomePage/homePage']" routerLinkActive="router-link-active" >Home</a></li>
+                <li><a [routerLink]="['/UserHome/homePage']" routerLinkActive="router-link-active" >Home</a></li>
                 <li><a href="#">Shop</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a [routerLink]="['/Login/UserHomePage/Wishlist']">Wishlist</a></li>
+                <li><a [routerLink]="['/UserHome/Wishlist']">Wishlist</a></li>
             </ul>
         </nav>
         <div class="header-icons">
-            <a  [routerLink]="['/Login/UserHomePage/AddToCart']"><i class="bi bi-cart"></i><span class="cart-count">3</span></a>
+            <a  [routerLink]="['/UserHome/AddToCart']"><i class="bi bi-cart"></i><span class="cart-count">3</span></a>
             
             <div class="dropdown">
                 <a class="dropdown-button">
                   <i class="bi bi-three-dots-vertical"></i>
                 </a>
                 <div class="dropdown-content">
-                  <a [routerLink]="['/AddSupplier']"><i class="bi bi-plus"></i>Add As supplier</a>
-                  <a  [routerLink]="['/Login']" ><i class="bi bi-person"></i>Login</a>
-                  <a  [routerLink]="['/UserRegister']" ><i class="bi bi-person"></i>Register</a>
+                  <a [routerLink]="['/UserHome/AddSupplier']"><i class="bi bi-plus"></i>Add As supplier</a>
+                  @if(!Token)
+                  { 
+                      <a  [routerLink]="['/UserHome/auth/login']" ><i class="bi bi-person"></i>Login</a>
+                      <a  [routerLink]="['/UserHome/auth/UserRegister']" ><i class="bi bi-person"></i>Register</a>
+                  }
                 </div>
               </div>
             

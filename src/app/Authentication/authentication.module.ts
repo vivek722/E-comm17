@@ -5,6 +5,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { UserRegisterComponent } from './user-register/user-register.component';
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -15,6 +16,9 @@ import { UserRegisterComponent } from './user-register/user-register.component';
     AuthenticationRoutingModule,
     RouterModule,
     ReactiveFormsModule,
+  ],
+  providers:[
+   
   ]
 })
 export class AuthenticationModule { }

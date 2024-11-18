@@ -14,6 +14,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { SharedModule } from "../Shared/shared.module";
 import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
+import { UserHeaderComponent } from './user-header/user-header.component';
+import { UserFooterComponent } from './user-footer/user-footer.component';
 @NgModule({
   declarations: [
     SupplierRegistrationComponent,
@@ -22,6 +24,8 @@ import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
     UserWishListComponent,
     UserHomeDesignComponent,
     UserHomeComponent,
+    UserHeaderComponent,
+    UserFooterComponent
   ],
   imports: [
     CommonModule,
