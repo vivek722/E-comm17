@@ -1,0 +1,86 @@
+<div class="checkout-container">
+    <mat-horizontal-stepper labelPosition="bottom">
+      <!-- Shipping Address Step -->
+      <mat-step label="Shipping Address" [stepControl]="shippingForm">
+        <form [formGroup]="shippingForm">
+          <h2>Shipping Details</h2>
+          <div class="form-grid">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Full Name</mat-label>
+              <input matInput value={{UserData.userName}} />
+            </mat-form-field>
+            <mat-form-field appearance="outline"class="half-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput type="tel" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Email</mat-label>
+              <input matInput  value={{UserData.email}}/>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Street Address</mat-label>
+              <input matInput value={{UserData.addresse.street}} />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput  class="half-width" value={{UserData.addresse.city}} />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>State</mat-label>
+              <input matInput  class="half-width" value={{UserData.addresse.state}}/>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Zip Code</mat-label>
+              <input matInput  class="half-width" value={{UserData.addresse.zipCode}} />
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" matStepperNext>Continue</button>
+        </form>
+      </mat-step>
+  
+      <!-- Payment Step -->
+      <mat-step label="Payment" [stepControl]="paymentForm">
+        <form [formGroup]="paymentForm">
+          <h2>Payment Method</h2>
+          <mat-radio-group formControlName="paymentMethod">
+            <mat-radio-button value="credit">Credit/Debit Card</mat-radio-button>
+            <mat-radio-button value="paypal">PayPal</mat-radio-button>
+            <mat-radio-button value="Online">Online</mat-radio-button>
+            <mat-radio-button value="Cash">Cash On Delivery</mat-radio-button>
+          </mat-radio-group>
+          <div *ngIf="paymentForm.get('paymentMethod')?.value === 'credit'" class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Card Number</mat-label>
+              <input matInput formControlName="cardNumber" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Expiry Date</mat-label>
+              <input matInput formControlName="expiryDate" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>CVV</mat-label>
+              <input matInput type="password" formControlName="cvv" />
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" matStepperNext>Review Order</button>
+        </form>
+      </mat-step>
+  
+      <!-- Review Order Step -->
+      <mat-step label="Review Order">
+        <h2>Order Summary</h2>
+        <mat-card>
+          <mat-card-title>Products</mat-card-title>
+          <mat-card-content>
+            <div *ngFor="let product of products">
+              <p>{{ product.name }} (x{{ product.quantity }}) - ${{ product.price }}</p>
+            </div>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-title>Total: ${{ totalAmount }}</mat-card-title>
+        </mat-card>
+        <button mat-raised-button color="primary" (click)="placeOrder()">Place Order</button>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+  

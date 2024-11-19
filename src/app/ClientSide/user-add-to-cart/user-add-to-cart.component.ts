@@ -4,6 +4,7 @@ import { AddToCart } from '../ClientModels/AddToCart';
 import { log } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import { json } from 'stream/consumers';
+import { GetUserInformationService } from '../ClientServices/get-user-information.service';
 
 @Component({
   selector: 'app-user-add-to-cart',
@@ -13,16 +14,15 @@ import { json } from 'stream/consumers';
 export class UserAddToCartComponent implements OnInit  {
 
   cartItems:any =[];
-  UserId=0;
-  UserName="";
+  UserTokenData:any;;
   totalAmount: number = 0;
   productprice:number = 0;
   discount: number = 0;
   finalPrice: number =0;
 
-  constructor(private addToCartService: AddToCartService,private toster:ToastrService) { }
+  constructor(private addToCartService: AddToCartService,private toster:ToastrService,private getUserInformation:GetUserInformationService) { }
   ngOnInit(): void {
-    this.getDataFromToken();
+   this.UserTokenData =  this.getUserInformation.getDataFromToken();
     this.getAllCartItems();
   }
     increaseQuantity(index: number) {
@@ -45,15 +45,13 @@ export class UserAddToCartComponent implements OnInit  {
       }
     }
     getAllCartItems() {
-      this.addToCartService.GetAllCartProducts(this.UserId).subscribe((res:AddToCart)=>{
+      this.addToCartService.GetAllCartProducts(this.UserTokenData.Id).subscribe((res:AddToCart)=>{
         this.cartItems = res.map((item: { quantity: any; }) => ({
           ...item,
           quantity: item.quantity || 1 
         }));
         this.cartItems.forEach((item: any) => {
-            item.Product.forEach((item: any) => {
-            this.productprice = item.productActualprice ?? 0; 
-          })
+            this.productprice = item.productActualprice ?? 0;
           const qty = item.quantity ?? 1;            
           this.totalAmount += this.productprice * qty;    
       });
@@ -61,15 +59,5 @@ export class UserAddToCartComponent implements OnInit  {
       })
     
       
-    }
-
-    getDataFromToken()
-    {
-      const token = localStorage.getItem('user');
-      if (token) {
-        const parsedToken = JSON.parse(token); 
-       this.UserId = parseInt(parsedToken.Id);
-       this.UserName = parsedToken.Name;
-      }
     }
  }

@@ -16,6 +16,12 @@ import { SharedModule } from "../Shared/shared.module";
 import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { UserFooterComponent } from './user-footer/user-footer.component';
+import { UserCheckoutComponent } from './user-checkout/user-checkout.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     SupplierRegistrationComponent,
@@ -25,7 +31,8 @@ import { UserFooterComponent } from './user-footer/user-footer.component';
     UserHomeDesignComponent,
     UserHomeComponent,
     UserHeaderComponent,
-    UserFooterComponent
+    UserFooterComponent,
+    UserCheckoutComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +43,13 @@ import { UserFooterComponent } from './user-footer/user-footer.component';
     MatListModule,
     MatDividerModule,
     SharedModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatInputModule,
+   
   ]
 })
 export class ClientSideModule { }

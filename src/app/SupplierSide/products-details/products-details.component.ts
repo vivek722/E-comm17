@@ -41,6 +41,8 @@ AddProduct(data?:any) {
       this.dataSource = new MatTableDataSource(this.AllProducts);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginatior;
+      console.log(this.AllProducts);
+      
     })
   }
 announceSortChange(sortState: Sort) {

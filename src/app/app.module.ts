@@ -7,12 +7,16 @@ import { ToastrModule } from 'ngx-toastr';
 import {  HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoggingInterceptor } from './Authentication/logging.interceptor';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+    
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     ToastrModule.forRoot({ 
@@ -20,6 +24,7 @@ import { LoggingInterceptor } from './Authentication/logging.interceptor';
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+    CommonModule,
   ],
   providers: [
     provideClientHydration(),

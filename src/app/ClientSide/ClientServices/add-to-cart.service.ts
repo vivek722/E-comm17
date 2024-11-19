@@ -22,12 +22,12 @@ export class AddToCartService {
 
   GetByIdCartProduct(id:number):Observable<AddToCart>
   {
-    return this.http.get<AddToCart>(`${this.AddToCart_URL}/AddProduct ${id}`);
+    return this.http.get<AddToCart>(`${this.AddToCart_URL}/AddProduct/${id}`);
   }
 
   DeleteProductInCart(id:number):Observable<AddToCart>
   {
-    return this.http.delete<AddToCart>(`${this.AddToCart_URL}/DeleteProductInCart ${id}`);
+    return this.http.delete<AddToCart>(`${this.AddToCart_URL}/DeleteProductInCart/${id}`);
   }
 
   UpdateCartProduct(Product:AddToCart):Observable<AddToCart>
