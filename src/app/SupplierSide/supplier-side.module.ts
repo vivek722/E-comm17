@@ -12,8 +12,9 @@ import { MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms'; 
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from "../Shared/shared.module"; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     SupplierSideNavbarComponent,
@@ -30,8 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatDialogModule, 
-    ReactiveFormsModule
-  ]
+    MatDialogModule,
+    ReactiveFormsModule,
+    SharedModule,
+    MatProgressSpinnerModule
+]
 })
 export class SupplierSideModule { }

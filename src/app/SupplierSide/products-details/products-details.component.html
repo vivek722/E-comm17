@@ -1,4 +1,5 @@
-
+@if (isloding==false)
+ {
 <div class="app-main__outer"> 
     <div class="app-main__inner">
       <div>
@@ -58,7 +59,10 @@
         <mat-paginator [pageSizeOptions]="[4, 8, 12]" showFirstLastButtons> 
         </mat-paginator>
         </div>
-        
    </div> 
   </div>
+}
+  @if(isloding){ 
+  <app-loder></app-loder>
+  }
   

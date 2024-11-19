@@ -24,7 +24,15 @@ export const canDeActivate = ()=>{
   }
   else
   {
-    router.navigate(['/UserHome/homePage'])
+   const RoleName = authservice.getToken()
+   if(RoleName == "Customer")
+    {
+      router.navigate(['/UserHome/homePage']);
+    }
+    else if(RoleName == "Supplier")
+    {
+      router.navigate(['UserHome/auth/Supplier/DeshboardDesign']);
+    }
     return false;
   }
   }

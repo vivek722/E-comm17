@@ -45,16 +45,11 @@ AddInventory(data?:any) {
 
 displayInventoryData() {
     this.Inventoryservice.GetAllInventorys().subscribe((res:any)=>{
-      this.inventoryData = res
+      this.inventoryData = res.data
+      console.log(res.data);
        this.dataSource = new MatTableDataSource(this.inventoryData);
        this.dataSource.paginator = this.paginatior;
        this.dataSource.sort = this.sort;
     })
   }
-
-
-  testToastr() {
-    this.toastr.success("Test message");
-    }
-
 }

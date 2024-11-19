@@ -16,7 +16,7 @@ export class ProductsDetailsComponent  implements OnInit {
 
   AllProducts: any[] = [];
   dataSource:any;
-
+  isloding:boolean = false
 constructor(private productService:ProductService,public dialog:MatDialog,private _liveAnnouncer:LiveAnnouncer){}
 
 @ViewChild(MatPaginator) paginatior!: MatPaginator;
@@ -36,14 +36,19 @@ AddProduct(data?:any) {
   });
   }
   displayProductData() {
+    this.isloding = true;
     this.productService.GetAllProducts().subscribe((res:any)=>{
-      this.AllProducts = res;      
+      this.AllProducts = res.data;  
+
       this.dataSource = new MatTableDataSource(this.AllProducts);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginatior;
       console.log(this.AllProducts);
-      
     })
+    setTimeout(() => {
+      this.isloding = false;
+    }, 5000);
+    
   }
 announceSortChange(sortState: Sort) {
   if (sortState.direction) {

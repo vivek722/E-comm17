@@ -3,7 +3,6 @@
 <div class="app-main__outer"> 
     <div class="app-main__inner">
       <div>
-        <button  mat-raised-button  (click)="testToastr()">Test Toastr</button>
         <h2>Inventory Details</h2>
         <div class="open-model"><button mat-raised-button (click)="AddInventory()">Add Inventory</button></div>
         <table  mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
