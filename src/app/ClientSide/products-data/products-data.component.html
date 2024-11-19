@@ -6,8 +6,8 @@
         <div class="product-card">
           <div class="product-image">
             <!-- Show only first image as main image -->
-            <img *ngIf="product.productImage?.length > 0" 
-                 [src]="product.productImage[0].productImag" 
+            <img *ngIf="product.productImag?.length > 0" 
+                 [src]="product.productImag" 
                  [alt]="product.productName" 
                  class="main-image">
             
