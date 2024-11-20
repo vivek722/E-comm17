@@ -55,8 +55,9 @@ export class LoggingInterceptor implements HttpInterceptor {
   private getExpirationTime(token: string)
   {
     try{
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.exp * 1000;
+      // const payload = JSON.parse(atob(token.split('.')[1]));
+      // return payload.exp * 1000;
+      return null;
     }
     catch(err){
       console.log('Error passing jwt Token',err);

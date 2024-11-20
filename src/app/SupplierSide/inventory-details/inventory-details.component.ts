@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class InventoryDetailsComponent {
   inventoryData:any[]=[];
   dataSource:any;
-
+  isloding:boolean = false
 
   constructor(private _liveAnnouncer: LiveAnnouncer,public dialog: MatDialog,private Inventoryservice:InventoryService,private toastr: ToastrService){}
   @ViewChild(MatPaginator) paginatior!: MatPaginator;
@@ -44,6 +44,7 @@ AddInventory(data?:any) {
 }
 
 displayInventoryData() {
+  this.isloding = true;
     this.Inventoryservice.GetAllInventorys().subscribe((res:any)=>{
       this.inventoryData = res.data
       console.log(res.data);
@@ -51,5 +52,8 @@ displayInventoryData() {
        this.dataSource.paginator = this.paginatior;
        this.dataSource.sort = this.sort;
     })
+    setTimeout(() => {
+      this.isloding = false;
+    }, 2000);
   }
 }

@@ -27,7 +27,7 @@ export class GetUserInformationService {
     const token = localStorage.getItem('user');
     if (token) {
       const parsedToken = JSON.parse(token); 
-      return parsedToken  ;
+      return parsedToken;
     }
   }
 }

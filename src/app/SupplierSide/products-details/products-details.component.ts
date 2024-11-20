@@ -44,11 +44,10 @@ AddProduct(data?:any) {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginatior;
       console.log(this.AllProducts);
-    })
+    })  
     setTimeout(() => {
       this.isloding = false;
-    }, 5000);
-    
+    }, 2000);
   }
 announceSortChange(sortState: Sort) {
   if (sortState.direction) {

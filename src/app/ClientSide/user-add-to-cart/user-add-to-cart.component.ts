@@ -16,22 +16,28 @@ export class UserAddToCartComponent implements OnInit  {
   cartItems:any =[];
   UserTokenData:any;;
   totalAmount: number = 0;
-  productprice:number = 0;
+  productOrignalprice:number = 0;
+  productActualprice:number = 0;
   discount: number = 0;
   finalPrice: number =0;
+  isloding: boolean = false;
+
 
   constructor(private addToCartService: AddToCartService,private toster:ToastrService,private getUserInformation:GetUserInformationService) { }
   ngOnInit(): void {
-   this.UserTokenData =  this.getUserInformation.getDataFromToken();
+    this.UserTokenData =  this.getUserInformation.getDataFromToken();
     this.getAllCartItems();
   }
     increaseQuantity(index: number) {
       this.cartItems[index].quantity++;
+      this.cartItems[index].product.productOrignalprice = this.cartItems[index].product.productOrignalprice * this.cartItems[index].quantity
+      this.cartItems[index].product.productActualprice = this.cartItems[index].product.productActualprice * this.cartItems[index].quantity
+      this.updeteCartAmount()
     }
     removeItem(products_id: number) {
       this.addToCartService.DeleteProductInCart(products_id).subscribe((res: any) => {
-        if(res) {
-          this.toster.success("Item removed successfully");
+        if(res.status == "Success") {
+          this.toster.success(res.message);
           this.getAllCartItems();
         }
       });
@@ -39,25 +45,31 @@ export class UserAddToCartComponent implements OnInit  {
     decreaseQuantity(index: number) {
       if (this.cartItems[index].quantity > 1)  {
         this.cartItems[index].quantity--;
+        this.cartItems[index].product.productOrignalprice = this.cartItems[index].product.productOrignalprice * this.cartItems[index].quantity
+        this.cartItems[index].product.productActualprice = this.cartItems[index].product.productActualprice * this.cartItems[index].quantity
+        this.updeteCartAmount()
       }
       else {
         this.toster.warning("Cannot decrease quantity less than 1");
       }
     }
     getAllCartItems() {
+      this.isloding = true;
       this.addToCartService.GetAllCartProducts(this.UserTokenData.Id).subscribe((res:AddToCart)=>{
-        this.cartItems = res.map((item: { quantity: any; }) => ({
-          ...item,
-          quantity: item.quantity || 1 
-        }));
-        this.cartItems.forEach((item: any) => {
-            this.productprice = item.productActualprice ?? 0;
-          const qty = item.quantity ?? 1;            
-          this.totalAmount += this.productprice * qty;    
-      });
+        this.cartItems = res.data;
+        this.updeteCartAmount()
         console.log(this.cartItems);
-      })
-    
-      
+      });
+      setTimeout(() => {
+          this.isloding = false;
+      }, 2000);
+    }
+    updeteCartAmount()
+    {
+      this.cartItems.forEach((item: any) => {
+        this.totalAmount += item.product.productOrignalprice * item.quantity;
+        this.discount += (item.product.productOrignalprice - item.product.productActualprice) * item.quantity;
+        this.finalPrice = this.totalAmount - this.discount;
+      });
     }
  }

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       }
       else if(RoleName == "Supplier")
       {
-        this.route.navigate(['UserHome/auth/Supplier/DeshboardDesign']);
+        this.route.navigate(['/UserHome/auth/Supplier/DeshboardDesign']);
       }
     }
       });

@@ -11,9 +11,9 @@ import { LoginComponent } from '../Authentication/login/login.component';
 
 
 const routes: Routes = [
-  {path:'',redirectTo:'homePage',pathMatch:'full'},
+  {path:'',redirectTo:'Client/homePage',pathMatch:'full'},
 
-  {path:'',component:UserHomeDesignComponent,
+  {path:'Client',component:UserHomeDesignComponent,
       children:[
         {path:'homePage',component:UserHomeComponent},
         {path:'Wishlist',component:UserWishListComponent},
@@ -22,6 +22,7 @@ const routes: Routes = [
     },
     {path:'AddSupplier',component:SupplierRegistrationComponent},
     {path:'auth',loadChildren: () => import('../Authentication/authentication.module').then(m => m.AuthenticationModule)},
+    {path:'Supplier',loadChildren: () => import('../SupplierSide/supplier-side.module').then(m => m.SupplierSideModule)},
     {path:'Checkout',component:UserCheckoutComponent,canActivate:[CanActivate] },
 ];
 
