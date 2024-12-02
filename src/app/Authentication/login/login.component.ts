@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../AuthenticationService/authentication.service';
 import { Router } from '@angular/router';
-
+import * as firebase from 'firebase/app';
+import * as firebaseui from 'firebaseui';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+
 
   constructor(private authservice: AuthenticationService,
     private formbuilder: FormBuilder,
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit {
        var RoleName = this.authservice.getToken()
       if(RoleName == "Customer")
       {
-        this.route.navigate(['/UserHome/homePage']);
+        this.route.navigate(['/UserHome/Client/homePage']);
       }
       else if(RoleName == "Supplier")
       {
@@ -43,6 +45,18 @@ export class LoginComponent implements OnInit {
       }
     }
       });
+    }
+  }
+ async  signInWithGoogle() {
+    try {
+      const user = await this.authservice.googleSignIn();
+      console.log('Google Sign-In successful:', user);
+      if(user != null)
+      {
+        this.route.navigate(['/UserHome/Client/homePage']);
+      }
+    } catch (error) {
+      console.error('Error during Google Sign-In:', error);
     }
   }
 }

@@ -9,7 +9,20 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoggingInterceptor } from './Authentication/logging.interceptor';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBGmPknD-eJE0nCvtYIs2KLlqLBwrJdF_Y",
+  authDomain: "ecomm-17.firebaseapp.com",
+  projectId: "ecomm-17",
+  storageBucket: "ecomm-17.firebasestorage.app",
+  messagingSenderId: "815304009271",
+  appId: "1:815304009271:web:d0f699d6acdd0fa58a81b2",
+  measurementId: "G-0PPY2B1159"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig), // Initialize Firebase
+    AngularFireAuthModule,
     ToastrModule.forRoot({ 
       timeOut: 3000,
       positionClass: 'toast-top-center',

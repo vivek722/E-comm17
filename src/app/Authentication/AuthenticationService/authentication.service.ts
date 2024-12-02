@@ -5,20 +5,20 @@ import { HttpClient } from '@angular/common/http';
 import { endpoints } from '../../../endpoints/endpoints';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
- 
- 
+  private ui: firebaseui.auth.AuthUI | null = null;
   tokenExpirationTimer:any;
   Auth_Url = endpoints.AUTH;
   private userSubject: BehaviorSubject<Login | null> = new BehaviorSubject<Login | null>(null);
   User : Observable<Login>= new  Observable<Login>; 
   tostr: any;
-  constructor( private router: Router,
+  constructor( private router: Router,private afAuth: AngularFireAuth,
     private http: HttpClient,
 ) { }
     
@@ -89,5 +89,16 @@ export class AuthenticationService {
   removeToken()
   {
     localStorage.removeItem('user');
+  }
+  async googleSignIn() {
+    try {
+      const result = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      console.log('User signed in successfully:', result.user);
+      localStorage.setItem('user',JSON.stringify(result.user))
+      return result.user;
+    } catch (error) {
+      console.error('Google Sign-In failed:', error);
+      throw error;
+    }
   }
 }
