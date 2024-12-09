@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import { Role } from '../../Shared/SharedModel/Role';
 
 @Injectable({
   providedIn: 'root'
@@ -100,5 +101,8 @@ export class AuthenticationService {
       console.error('Google Sign-In failed:', error);
       throw error;
     }
+  }
+  checkRole(email:any) : Observable<any>{
+    return this.http.get<any>(`${this.Auth_Url}/GetRoledata/${email}`)
   }
 }

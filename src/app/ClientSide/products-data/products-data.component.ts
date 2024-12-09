@@ -40,7 +40,11 @@ export class ProductsDataComponent {
         this.products = res.data;
         if (this.products) {
         }
-      });
+      }).add( () => {
+        setTimeout(() => {
+          this.isloding=false;
+        }, 2000);
+      })
     }
     else if(this.Title == "Trending Products")
     {
@@ -48,11 +52,13 @@ export class ProductsDataComponent {
       this.products = res.data;
       if (this.products) {
       }
-    });
+    }).add( () => {
+      setTimeout(() => {
+        this.isloding=false;
+      }, 2000);
+    })
     }
-    setTimeout(() => {
-      this.isloding=false;
-    }, 2000);
+    
   }
 
   AddToWishlist(ProductId: number) {

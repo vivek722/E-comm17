@@ -4,6 +4,7 @@ import { AuthenticationService } from '../AuthenticationService/authentication.s
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private authservice: AuthenticationService,
     private formbuilder: FormBuilder,
     private route: Router,
+    private tosterService: ToastrService 
 
   ) {}
 
@@ -35,14 +37,7 @@ export class LoginComponent implements OnInit {
       if(res != null)
       {
        var RoleName = this.authservice.getToken()
-      if(RoleName == "Customer")
-      {
-        this.route.navigate(['/UserHome/Client/homePage']);
-      }
-      else if(RoleName == "Supplier")
-      {
-        this.route.navigate(['/UserHome/auth/Supplier/DeshboardDesign']);
-      }
+       this.RoleBaseNavigation(RoleName)
     }
       });
     }
@@ -53,10 +48,26 @@ export class LoginComponent implements OnInit {
       console.log('Google Sign-In successful:', user);
       if(user != null)
       {
-        this.route.navigate(['/UserHome/Client/homePage']);
+        const role = await this.authservice.checkRole(user.email) 
+        console.log(role);
+        
+        this.RoleBaseNavigation(role)
       }
     } catch (error) {
       console.error('Error during Google Sign-In:', error);
     }
+  }
+
+  RoleBaseNavigation(RoleName : any)
+  {
+    if(RoleName == "Customer")
+      {
+        this.route.navigate(['/UserHome/Client/homePage']);
+      }
+      else if(RoleName == "Supplier")
+      {
+        this.route.navigate(['/UserHome/auth/Supplier/DeshboardDesign']);
+        this.tosterService.success("login scussfully")
+      }
   }
 }

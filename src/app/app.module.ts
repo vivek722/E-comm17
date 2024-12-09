@@ -36,7 +36,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     ToastrModule.forRoot({ 
       timeOut: 3000,
-      positionClass: 'toast-top-center',
+      positionClass: 'toast-center-center',
       preventDuplicates: true,
     }),
     CommonModule,
