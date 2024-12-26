@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleService } from '../../Shared/SharedService/role.service';
 import { UserRegisterService } from '../AuthenticationService/user-register.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-register',
@@ -17,7 +18,8 @@ export class UserRegisterComponent implements OnInit  {
       private fb: FormBuilder,
       private  userregister: UserRegisterService,
       private Roleserver:RoleService,
-      private router: Router
+      private router: Router,
+      private tosterService: ToastrService 
     ) {
    
     }
@@ -42,7 +44,7 @@ export class UserRegisterComponent implements OnInit  {
       var registerData = this.DataSource.getRawValue();
       this.userregister.Register(registerData).subscribe((res: any) => {
         if(res != null) {
-          console.log("successfully");
+          this.tosterService.success("Your registration was successfully Complete")
         }
     });
   }

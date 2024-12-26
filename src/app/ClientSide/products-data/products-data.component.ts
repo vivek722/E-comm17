@@ -64,9 +64,9 @@ export class ProductsDataComponent {
   AddToWishlist(ProductId: number) {
     this.Wishlistproducts = this.formBuilder.group({
       ProductId: [ProductId],
-      UserId: [parseInt(this.userId.Id)]
+      UserEmail: this.userId.email
     });
-    this.wishlistService.isProductInWishlist(ProductId, this.userId.Id).subscribe((res: any) => {
+    this.wishlistService.isProductInWishlist(ProductId, this.userId.email).subscribe((res: any) => {
       if (res.message != "Empty") {
         this.tosterService.warning(res.message)
       } else {
@@ -87,10 +87,10 @@ export class ProductsDataComponent {
   AddToCart(ProductId: number) {
     this.AddToCartproducts = this.formBuilder.group({
       ProductId: [ProductId],
-      UserId: [parseInt(this.userId.Id)],
+      UserEmail: this.userId.email,
       Quantity: [1]
     });
-    this.addToCartService.isProductInCart(ProductId, this.userId.Id).subscribe((res: any) => {
+    this.addToCartService.isProductInCart(ProductId, this.userId.email).subscribe((res: any) => {
       if (res.message != "Empty") {
         this.tosterService.warning(res.message);
       } else {

@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { InventoryService } from '../SupplierServices/inventory.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ToastrService } from 'ngx-toastr';
+import { AddSupplierPagesComponent } from '../../admin.module/add-supplier-pages/add-supplier-pages.component';
+import { AddCustomerPagesComponent } from '../../admin.module/add-customer-pages/add-customer-pages.component';
 @Component({
   selector: 'app-inventory-details',
   templateUrl: './inventory-details.component.html',

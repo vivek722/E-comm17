@@ -6,13 +6,13 @@ import { ProductsDetailsComponent } from './products-details/products-details.co
 import { InventoryDetailsComponent } from './inventory-details/inventory-details.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'DeshboardDesign',pathMatch:'full'},
+  {path:'',redirectTo:'Supllier-Deshboard',pathMatch:'full'},
   {
    path: '', 
    component: SupplierSideNavbarComponent,
    children: [
      {
-       path: 'DeshboardDesign',
+       path: 'Supllier-Deshboard',
        component: SupplierDeshboardComponent
      },
      {

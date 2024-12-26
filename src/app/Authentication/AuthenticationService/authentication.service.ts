@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Login } from '../AuthenticationModel/Login';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { endpoints } from '../../../endpoints/endpoints';
 import { Router } from '@angular/router';
@@ -52,7 +52,7 @@ export class AuthenticationService {
       if (token) {
         const decodedToken = this.getDecodedAccessToken(token);
         localStorage.setItem('user',JSON.stringify(decodedToken))
-        return decodedToken.Role; 
+        return decodedToken.role; 
       }
       return null;
     }
@@ -102,7 +102,16 @@ export class AuthenticationService {
       throw error;
     }
   }
-  checkRole(email:any) : Observable<any>{
-    return this.http.get<any>(`${this.Auth_Url}/GetRoledata/${email}`)
+  async checkRole(email: string): Promise<Role> {
+    try {
+      const response = await firstValueFrom(
+        this.http.get<Role>(`${this.Auth_Url}/GetRoledata/${email}`)
+      );
+      console.log('Role Response:', response); // For Debugging
+      return response;
+    } catch (error) {
+      console.error('Failed to fetch user role:', error);
+      throw error;
+    }
   }
 }

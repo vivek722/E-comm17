@@ -34,7 +34,7 @@ export class AddToCartService {
   {
     return this.http.put<AddToCart>(`${this.AddToCart_URL}/UpdateCartProduct`,Product);
   }
-  isProductInCart(ProductId: number, userId: number) {
-    return this.http.get<AddToCart>(`${this.AddToCart_URL}/isProductInCart?ProductId=${ProductId}&UserId=${userId}`);
+  isProductInCart(ProductId: number, userEmail: string) {
+    return this.http.get<AddToCart>(`${this.AddToCart_URL}/isProductInCart?ProductId=${ProductId}&emailId=${userEmail}`);
   }
 }

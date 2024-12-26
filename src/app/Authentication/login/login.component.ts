@@ -46,12 +46,15 @@ export class LoginComponent implements OnInit {
     try {
       const user = await this.authservice.googleSignIn();
       console.log('Google Sign-In successful:', user);
-      if(user != null)
-      {
-        const role = await this.authservice.checkRole(user.email) 
-        console.log(role);
-        
-        this.RoleBaseNavigation(role)
+      if (user != null && typeof user.email === 'string') {
+        try {
+          const role = await this.authservice.checkRole(user.email);
+          console.log("check", role);
+      
+          this.RoleBaseNavigation(role);
+        } catch (error) {
+          console.error("Error fetching role:", error);
+        }
       }
     } catch (error) {
       console.error('Error during Google Sign-In:', error);
@@ -63,11 +66,17 @@ export class LoginComponent implements OnInit {
     if(RoleName == "Customer")
       {
         this.route.navigate(['/UserHome/Client/homePage']);
+        this.tosterService.success("login scussfully")
       }
       else if(RoleName == "Supplier")
       {
-        this.route.navigate(['/UserHome/auth/Supplier/DeshboardDesign']);
+        this.route.navigate(['/UserHome/auth/Supplier/Supllier-Deshboard']);
         this.tosterService.success("login scussfully")
       }
+      else if(RoleName == "Admin")
+        {
+          this.route.navigate(['/UserHome/auth/Admin/Admin-Deshboard']);
+          this.tosterService.success("login scussfully")
+        }
   }
 }

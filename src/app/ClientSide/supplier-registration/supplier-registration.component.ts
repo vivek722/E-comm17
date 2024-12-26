@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SupplierService } from '../../SupplierSide/SupplierServices/supplier.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-supplier-registration',
@@ -15,6 +16,7 @@ export class SupplierRegistrationComponent {
     constructor(
       private fb: FormBuilder,
       private supplierservice: SupplierService,
+      private tosterService: ToastrService 
     ) {
    
     }
@@ -37,7 +39,7 @@ export class SupplierRegistrationComponent {
       var SupplierData = this.DataSource.getRawValue();
       this.supplierservice.AddSuppliers(SupplierData).subscribe((res: any) => {
         if(res != null) {
-          console.log("successfully");
+          this.tosterService.success("Your registration was successfully Complete")
         }
     });
   }

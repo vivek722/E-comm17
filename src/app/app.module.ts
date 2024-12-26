@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-    
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGmPknD-eJE0nCvtYIs2KLlqLBwrJdF_Y",

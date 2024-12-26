@@ -5,8 +5,6 @@ import { LoderComponent } from './loder/loder.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
-
-  
     LoderComponent
   ],
   imports: [

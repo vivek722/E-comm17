@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { ProductService } from '../SupplierServices/product.service';
-import { MatDialog } from '@angular/material/dialog';
-import { SupplierService } from '../SupplierServices/supplier.service';
+import { ProductService } from '../../SupplierSide/SupplierServices/product.service';
+import { SupplierService } from '../../SupplierSide/SupplierServices/supplier.service';
 
 @Component({
-  selector: 'app-add-products',
-  templateUrl: './add-products.component.html',
-  styleUrl: './add-products.component.css'
+  selector: 'app-add-supplier-pages',
+  templateUrl: './add-supplier-pages.component.html',
+  styleUrl: './add-supplier-pages.component.css'
 })
-export class AddProductsComponent {
-
+export class AddSupplierPagesComponent {
   supplierData:any
   productForm!: FormGroup;
   constructor(
@@ -43,20 +42,6 @@ export class AddProductsComponent {
     get productImages(): FormArray {
       return this.productForm.get('ProductImages') as FormArray;
     }
-  
-   openModal(): void {
-  const dialogRef = this.dialog.open(AddProductsComponent, {
-    width: '400px',
-    data: { suppliers: this.supplierData }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      console.log('Product data:', result);
-      this.productForm.patchValue(result);
-    }
-  });
-}
     createFileControl(): FormGroup {
       return this.fb.group({
         file: [null, Validators.required]
