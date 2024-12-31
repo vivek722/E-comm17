@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AdminServiceService } from '../Admin-Service/admin-service.service';
 
@@ -15,7 +15,7 @@ export class AddCustomerPagesComponent implements OnInit {
   constructor(
     private adminService:AdminServiceService,
      private fb:FormBuilder,
-     public dialog: MatDialog,
+     public dialog: MatDialogRef<AddCustomerPagesComponent>,
      private toastr: ToastrService
     ){}
     
@@ -28,32 +28,18 @@ export class AddCustomerPagesComponent implements OnInit {
         IsDeleteDialogActive:  [],
       });
     }
-    openModal(): void {
-      const dialogRef = this.dialog.open(AddCustomerPagesComponent, {
-        width: '400px',
-        data: { customerData: this.CustomerPageData }
-      });
-    
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          console.log('customer Page data:', result);
-          this.AddCustomerPageForm.patchValue(result);
-        }
-      });
-    }
-
-    
+  
     async AddCustomerPage() {
     var CustomerPage = this.AddCustomerPageForm.getRawValue();
-     (await this.adminService.AddCustomerPageSetting(CustomerPage)).subscribe(res => {
+     (await this.adminService.AddCustomerPageSetting(CustomerPage)).subscribe((res:any) => {
       console.log(res);
-      if(res != null)
-      {
-        this.toastr.success("Customer Page added successfully");
+      if(res != null){
+        this.toastr.success(res.message);
       }
     })
+    this.dialog.close(true);
   }
   CloseAddCustomerDailog() {
-    this.dialog.closeAll();
+    this.dialog.close(false);
   }   
 }

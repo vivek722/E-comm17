@@ -14,7 +14,11 @@ export class ProductService {
 
    AddProduct(product:Product):Observable<Product>
   {
-    return  this.http.post<Product>(`${this.product_Url}/AddProduct`,product);
+    const formData = new FormData();
+    Object.entries(product).forEach(([key,value])=>{
+      formData.append(key, value);
+    })
+    return  this.http.post<Product>(`${this.product_Url}/AddProduct`,formData);
   }
 
   GetAllProducts():Observable<Product>
@@ -24,16 +28,20 @@ export class ProductService {
 
   GetByIdProduct(id:number):Observable<Product>
   {
-    return this.http.get<Product>(`${this.product_Url}/AddProduct ${id}`);
+    return this.http.get<Product>(`${this.product_Url}/AddProduct/${id}`);
   }
 
   DeleteProduct(id:number):Observable<Product>
   {
-    return this.http.delete<Product>(`${this.product_Url}/DeleteProduct ${id}`);
+    return this.http.delete<Product>(`${this.product_Url}/DeleteProduct/${id}`);
   }
 
   UpdateProduct(Product:Product):Observable<Product>
   {
-    return this.http.put<Product>(`${this.product_Url}/UpdateProduct`,Product);
+    const formData = new FormData();
+    Object.entries(Product).forEach(([key,value])=>{
+      formData.append(key, value);
+    })
+    return this.http.put<Product>(`${this.product_Url}/UpdateProduct`,formData);
   }
 }

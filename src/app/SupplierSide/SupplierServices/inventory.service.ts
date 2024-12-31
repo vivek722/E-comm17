@@ -27,16 +27,20 @@ GetAllInventorys():Observable<Inventory>
 
 GetByIdInventory(id:number):Observable<Inventory>
 {
-  return this.http.get<Inventory>(`${this.Iventory_Url}/AddProduct ${id}`);
+  return this.http.get<Inventory>(`${this.Iventory_Url}/AddProduct${id}`);
 }
 
 DeleteInventory(id:number):Observable<Inventory>
 {
-  return this.http.delete<Inventory>(`${this.Iventory_Url}/DeleteInventory ${id}`);
+  return this.http.delete<Inventory>(`${this.Iventory_Url}/DeleteInventory/${id}`);
 }
 
-UpdateInventory(Product:Inventory):Observable<Inventory>
+UpdateInventory(Inventory:Inventory):Observable<Inventory>
 {
-  return this.http.put<Inventory>(`${this.Iventory_Url}/UpdateInventory`,Product);
+  const formData = new FormData();
+    Object.entries(Inventory).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+  return this.http.put<Inventory>(`${this.Iventory_Url}/UpdateInventory`,formData);
 }
 }

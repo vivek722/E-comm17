@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminServiceService } from '../Admin-Service/admin-service.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AdminSupplierServiceService } from '../Admin-Service/admin-supplier-service.service';
 
@@ -16,7 +15,7 @@ supplierData:any
   constructor(
     private adminService:AdminSupplierServiceService,
      private fb:FormBuilder,
-     public dialog: MatDialog,
+     public dialogref: MatDialogRef<AddSupplierPagesComponent>,
      private toastr: ToastrService
     ){}
     
@@ -30,31 +29,18 @@ supplierData:any
       });
     }
 
-    openModal(): void {
-      const dialogRef = this.dialog.open(AddSupplierPagesComponent, {
-        width: '400px',
-        data: { suppliers: this.supplierData }
-      });
-    
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          console.log('customer Page data:', result);
-          this.AddsupplierPageForm.patchValue(result);
-        }
-      });
-    }
-
     async AddSupplierPage() {
     var CustomerPage = this.AddsupplierPageForm.getRawValue();
-     (await this.adminService.AddSupplierPageSetting(CustomerPage)).subscribe(res => {
+     (await this.adminService.AddSupplierPageSetting(CustomerPage)).subscribe((res:any) => {
       console.log(res);
       if(res != null)
       {
-        this.toastr.success("Customer Page added successfully");
+        this.toastr.success(res.message);
       }
     })
+    this.dialogref.close(true);
   }
   CloseAddSupplierPageDailog() {
-    this.dialog.closeAll();
+    this.dialogref.close(false);
   }   
 }

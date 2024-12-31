@@ -29,9 +29,12 @@ constructor(private AdminService:AdminSupplierServiceService,public dialog:MatDi
 displayedColumns: string[] = ['Index','Page Name','Page Active','Toster Message Active','Delete Dailog Active','Loader Active','Action'];
 
 AddSupplierPage(data?:any) {
-  const dialogRef = this.dialog.open(AddSupplierPagesComponent,{
-    data,
-  });
+  const dialogRef = this.dialog.open(AddSupplierPagesComponent)
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == true) {
+      this.displayProductData();
+    }
+  })
   }
   displayProductData() {
     this.isloding = true;

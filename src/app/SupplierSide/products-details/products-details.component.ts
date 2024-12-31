@@ -31,8 +31,11 @@ constructor(private productService:ProductService,public dialog:MatDialog,privat
 displayedColumns: string[] = ['Product Image','Product Name', 'Product Description', 'Product Orignal Price', 'Product Offer Price','Action'];
 
 AddProduct(data?:any) {
-  const dialogRef = this.dialog.open(AddProductsComponent,{
-    data,
+  const dialogRef = this.dialog.open(AddProductsComponent);
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == true) {
+      this.displayProductData();
+    }
   });
   }
   displayProductData() {

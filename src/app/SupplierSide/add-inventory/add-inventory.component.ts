@@ -26,7 +26,6 @@ export class AddInventoryComponent implements OnInit {
     this.Productservice.GetAllProducts().subscribe((res: any) => {
       if (res != null) {
         this.ProductData = res.data;
-        console.log(this.ProductData)
       }
     });
 
@@ -41,15 +40,16 @@ export class AddInventoryComponent implements OnInit {
   AddInventory() {
     if (this.InventoryData.valid) {
       var inventoryData = this.InventoryData.getRawValue();
-      this.inventoryservice.AddInventory(inventoryData).subscribe(res => {
+      this.inventoryservice.AddInventory(inventoryData).subscribe((res:any) => {
         if (res != null) {
-          this.toastr.success("Inventory added successfully");
+          this.toastr.success(res.message);
         }
+        this.dialogRef.close(true);
       });
     }
   }
 
   CloseAddInventoryDailog() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 }

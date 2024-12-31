@@ -33,8 +33,7 @@ AddCustomerPage(data?:any) {
     data,
   });
   dialogRef.afterClosed().subscribe(result => {
-    if(result)
-    {
+    if(result == true){
       this.displayProductData();
     }
   });
@@ -58,7 +57,6 @@ AddCustomerPage(data?:any) {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.AdminService.deleteCustomerPage(id).subscribe((res:any)=>{
-          console.log(res);
           this.displayProductData();
         })  
       }

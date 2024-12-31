@@ -8,6 +8,7 @@ import { InventoryService } from '../SupplierServices/inventory.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteConfirmationDialogComponent } from '../../Shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { AdminSupplierServiceService } from '../../admin-side/Admin-Service/admin-supplier-service.service';
 
 @Component({
   selector: 'app-inventory-details',
@@ -16,10 +17,16 @@ import { DeleteConfirmationDialogComponent } from '../../Shared/delete-confirmat
 })
 export class InventoryDetailsComponent {
   inventoryData:any[]=[];
+  pageSettings:any[]=[];
   dataSource:any;
   isloding:boolean = false
 
-  constructor(private _liveAnnouncer: LiveAnnouncer,public dialog: MatDialog,private Inventoryservice:InventoryService,private toastr: ToastrService){}
+  constructor(private _liveAnnouncer: LiveAnnouncer,
+    public dialog: MatDialog,
+    private Inventoryservice:InventoryService,
+    private toastr: ToastrService,
+    private adminSupplierPageService: AdminSupplierServiceService
+  ){}
   @ViewChild(MatPaginator) paginatior!: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
@@ -29,6 +36,10 @@ export class InventoryDetailsComponent {
 
 displayedColumns: string[] = ['Product Image','Product Name','quantity','warehouse Name','location','Action'];
 
+
+getPageSettingValue(){
+  // this.pageSettings = this.adminSupplierPageService.
+}
 announceSortChange(sortState: Sort) {
   if (sortState.direction) {
     this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -39,7 +50,7 @@ announceSortChange(sortState: Sort) {
 AddInventory(data?:any) {
   const dialogRef = this.dialog.open(AddInventoryComponent);
   dialogRef.afterClosed().subscribe(result => {
-    if (result) {
+    if (result == true) {
       this.displayInventoryData();
     }
 });
@@ -56,6 +67,7 @@ const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
    });
 }
 displayInventoryData() {
+
   this.isloding = true;
     this.Inventoryservice.GetAllInventorys().subscribe((res:any)=>{
       this.inventoryData = res.data

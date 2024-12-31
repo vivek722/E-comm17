@@ -12,7 +12,11 @@ CustomerPageSetting_URL = endpoints.CustomerPagesSetting;
   constructor(private httpclient: HttpClient) { }
 
   AddCustomerPageSetting(customerPageSetting:CustomerPageSetting) :Observable<CustomerPageSetting>{
-    return this.httpclient.post<CustomerPageSetting>(`${this.CustomerPageSetting_URL}/CustomerPageAdd`, customerPageSetting);
+    const fromdata = new FormData();
+    Object.entries(customerPageSetting).forEach(([key,value])=>{
+      fromdata.append(key,value);
+    })
+    return this.httpclient.post<CustomerPageSetting>(`${this.CustomerPageSetting_URL}/CustomerPageAdd`, fromdata);
   }
 
   getAllCustomerPageSetting():Observable<CustomerPageSetting> 

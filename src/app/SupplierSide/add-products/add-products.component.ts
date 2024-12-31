@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../SupplierServices/product.service';
-import { MatDialog } from '@angular/material/dialog';
+import {  MatDialogRef } from '@angular/material/dialog';
 import { SupplierService } from '../SupplierServices/supplier.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class AddProductsComponent implements OnInit {
     private supplerservice:SupplierService,
      private fb:FormBuilder,
      private productService:ProductService ,
-     public dialog: MatDialog,
+     public dialogRef: MatDialogRef<AddProductsComponent>,
      private toastr: ToastrService
     ){}
     
@@ -26,8 +26,7 @@ export class AddProductsComponent implements OnInit {
       this.supplerservice.GetAllSupplier().subscribe((res:any)=>{
         if(res != null)
         {
-          console.log("response",res)
-          this.supplierData = res
+          this.supplierData = res.data;
         }
       });
       
@@ -45,19 +44,6 @@ export class AddProductsComponent implements OnInit {
       return this.productForm.get('ProductImages') as FormArray;
     }
   
-   openModal(): void {
-  const dialogRef = this.dialog.open(AddProductsComponent, {
-    width: '400px',
-    data: { suppliers: this.supplierData }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      console.log('Product data:', result);
-      this.productForm.patchValue(result);
-    }
-  });
-}
     createFileControl(): FormGroup {
       return this.fb.group({
         file: [null, Validators.required]
@@ -70,17 +56,15 @@ export class AddProductsComponent implements OnInit {
   
     async AddProduct() {
     var ProductData = this.productForm.getRawValue();
-    console.log(ProductData);
     
-     (await this.productService.AddProduct(ProductData)).subscribe(res => {
-      console.log(res);
-      if(res != null)
-      {
-        this.toastr.success("Product added successfully");
+     (await this.productService.AddProduct(ProductData)).subscribe((res:any) => {
+      if(res != null){
+        this.toastr.success(res.message);
       }
-    })
+    });
+    this.dialogRef.close(true);
   }
   CloseAddProductDailog() {
-    this.dialog.closeAll();
+    this.dialogRef.close(false);
   }   
 }
