@@ -13,7 +13,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedModule } from "../Shared/shared.module";
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { SharedModule } from "../Shared/shared.module";
     MatPaginatorModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule,
     SharedModule
 ]
 })

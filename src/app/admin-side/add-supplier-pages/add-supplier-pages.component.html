@@ -1,0 +1,43 @@
+
+<section class="login">
+    <div class="login_box">
+        <div class="left">
+            
+            <div class="contact">
+                <form [formGroup]="AddsupplierPageForm">
+                    <h1 class="Dialog-Title">Add Supplier Page</h1><h1 style="display: flex; justify-content: end;"><i class="bi bi-x" (click)="CloseAddSupplierPageDailog()"></i></h1>
+                  
+                    <input type="text" formControlName="PageName" placeholder="Product Name">
+                    <p>IsLoderActive
+                    <mat-button-toggle-group formControlName="IsLoderActive"  name="fontStyle" aria-label="Font Style">
+                      <mat-button-toggle class="left-toggle" value="On">On</mat-button-toggle>
+                      <mat-button-toggle class="left-toggle" value="Off">Off</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </p>
+                  <p>IsDeleteDialogActive
+                    <mat-button-toggle-group formControlName="IsDeleteDialogActive" name="fontStyle" aria-label="Font Style">
+                      <mat-button-toggle class="left-toggle" value="On">On</mat-button-toggle>
+                      <mat-button-toggle class="left-toggle" value="Off">Off</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </p>
+                  <p>IsTosterActive
+                    <mat-button-toggle-group formControlName="IsTosterActive" name="fontStyle" aria-label="Font Style">
+                      <mat-button-toggle class="left-toggle" value="On">On</mat-button-toggle>
+                      <mat-button-toggle class="left-toggle" value="Off">Off</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </p>
+                  <p>IsPageActive
+                    <mat-button-toggle-group formControlName="IsPageActive" name="fontStyle" aria-label="Font Style">
+                      <mat-button-toggle class="left-toggle" value="On">On</mat-button-toggle>
+                      <mat-button-toggle class="left-toggle" value="Off">Off</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </p>
+                  <div class="button-container">
+                    <button class="submit" type="submit" (click)="AddSupplierPage()">Add Page</button>
+                    <button class="submit" type="button" (click)="CloseAddSupplierPageDailog()">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

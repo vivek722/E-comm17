@@ -7,8 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { InventoryService } from '../SupplierServices/inventory.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ToastrService } from 'ngx-toastr';
-import { AddSupplierPagesComponent } from '../../admin.module/add-supplier-pages/add-supplier-pages.component';
-import { AddCustomerPagesComponent } from '../../admin.module/add-customer-pages/add-customer-pages.component';
+import { DeleteConfirmationDialogComponent } from '../../Shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
+
 @Component({
   selector: 'app-inventory-details',
   templateUrl: './inventory-details.component.html',
@@ -37,14 +37,24 @@ announceSortChange(sortState: Sort) {
   }
 }
 AddInventory(data?:any) {
-  const dialogRef = this.dialog.open(AddInventoryComponent,{
-    data,
-  });
+  const dialogRef = this.dialog.open(AddInventoryComponent);
   dialogRef.afterClosed().subscribe(result => {
-    this.displayInventoryData();
-  });
+    if (result) {
+      this.displayInventoryData();
+    }
+});
 }
-
+DeleteInventory(id:number){
+const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
+       dialogRef.afterClosed().subscribe(result => {
+         if (result) {
+           this.Inventoryservice.DeleteInventory(id).subscribe((res:any)=>{
+            this.toastr.success(res.message)
+             this.displayInventoryData();
+        })  
+      }
+   });
+}
 displayInventoryData() {
   this.isloding = true;
     this.Inventoryservice.GetAllInventorys().subscribe((res:any)=>{

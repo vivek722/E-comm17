@@ -28,6 +28,7 @@
     "@ngrx/router-store": "^17.2.0",
     "@ngrx/store": "^17.2.0",
     "@ngrx/store-devtools": "^17.2.0",
+    "bootstrap-icons": "^1.11.3",
     "firebaseui": "^6.1.0",
     "jwt-decode": "^4.0.0",
     "ngx-toastr": "^17.0.2",

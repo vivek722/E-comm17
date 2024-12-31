@@ -1,3 +1,5 @@
+import { CustomerPagesSettingComponent } from '../app/admin-side/customer-pages-setting/customer-pages-setting.component';
+import { SupplierDeshboardComponent } from '../app/SupplierSide/supplier-deshboard/supplier-deshboard.component';
 import { environment } from '../environements/environements';
 
 export const endpoints = {
@@ -14,4 +16,6 @@ export const endpoints = {
   User: environment.E_Commerce_Url + '/User',
   WishList: environment.E_Commerce_Url + '/Wishlist',
   AddToCart: environment.E_Commerce_Url + '/AddToCart',
+  CustomerPagesSetting: environment.E_Commerce_Url + '/CustomerPageSetting',
+  SupplierPagesSetting: environment.E_Commerce_Url + '/SupplierPageSetting',
 };

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../SupplierServices/inventory.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './add-inventory.component.html',
   styleUrl: './add-inventory.component.css'
 })
-export class AddInventoryComponent {
+export class AddInventoryComponent implements OnInit {
   ProductData: any;
   InventoryData!: FormGroup;
 
@@ -25,7 +25,8 @@ export class AddInventoryComponent {
   ngOnInit(): void {
     this.Productservice.GetAllProducts().subscribe((res: any) => {
       if (res != null) {
-        this.ProductData = res;
+        this.ProductData = res.data;
+        console.log(this.ProductData)
       }
     });
 

@@ -6,6 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { AddProductsComponent } from '../add-products/add-products.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DeleteConfirmationDialogComponent } from '../../Shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-products-details',
@@ -17,7 +20,7 @@ export class ProductsDetailsComponent  implements OnInit {
   AllProducts: any[] = [];
   dataSource:any;
   isloding:boolean = false
-constructor(private productService:ProductService,public dialog:MatDialog,private _liveAnnouncer:LiveAnnouncer){}
+constructor(private productService:ProductService,public dialog:MatDialog,private _liveAnnouncer:LiveAnnouncer,private toster:ToastrService){}
 
 @ViewChild(MatPaginator) paginatior!: MatPaginator;
 @ViewChild(MatSort) sort !: MatSort;
@@ -30,9 +33,6 @@ displayedColumns: string[] = ['Product Image','Product Name', 'Product Descripti
 AddProduct(data?:any) {
   const dialogRef = this.dialog.open(AddProductsComponent,{
     data,
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.displayProductData();
   });
   }
   displayProductData() {
@@ -48,6 +48,17 @@ AddProduct(data?:any) {
     setTimeout(() => {
       this.isloding = false;
     }, 2000);
+  }
+  DeleteProduct(id:number){
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
+           dialogRef.afterClosed().subscribe(result => {
+             if (result) {
+               this.productService.DeleteProduct(id).subscribe((res:any)=>{
+                this.toster.success(res.message)
+                 this.displayProductData();
+            })  
+          }
+       });
   }
 announceSortChange(sortState: Sort) {
   if (sortState.direction) {

@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'UserRegister', component: UserRegisterComponent},
   {path:'UserHomePage', loadChildren: () => import('../ClientSide/client-side.module').then(m => m.ClientSideModule)},
   {path:'Supplier', loadChildren: () => import('../SupplierSide/supplier-side.module').then(m => m.SupplierSideModule)},
-  {path:'Admin', loadChildren: () => import('../admin.module/admin.module.module').then(m => m.AdminModuleModule)},
+  {path:'Admin',loadChildren: () => import('../admin-side/admin-side.module').then(m => m.AdminSideModule)}
 ];
 
 @NgModule({

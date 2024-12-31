@@ -13,7 +13,11 @@ export class InventoryService {
 
 AddInventory(Iventory:Inventory): Observable<Inventory>
 {
-  return this.http.post<Inventory>(`${this.Iventory_Url}/AddInventory`,Iventory)
+  const formData = new FormData();
+    Object.entries(Iventory).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+  return this.http.post<Inventory>(`${this.Iventory_Url}/AddInventory`,formData)
 }
 
 GetAllInventorys():Observable<Inventory>

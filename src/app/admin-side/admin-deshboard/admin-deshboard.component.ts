@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../SupplierServices/product.service';
-import { InventoryService } from '../SupplierServices/inventory.service';
+import { ProductService } from '../../SupplierSide/SupplierServices/product.service';
+import { InventoryService } from '../../SupplierSide/SupplierServices/inventory.service';
 
 @Component({
-  selector: 'app-supplier-deshboard',
-  templateUrl: './supplier-deshboard.component.html',
-  styleUrl: './supplier-deshboard.component.css'
+  selector: 'app-admin-deshboard',
+  templateUrl: './admin-deshboard.component.html',
+  styleUrl: './admin-deshboard.component.css'
 })
-export class SupplierDeshboardComponent implements OnInit  {
-   TotalProducts: number =0
+export class AdminDeshboardComponent implements OnInit {
+TotalProducts: number =0
    TotalOrders: number =0
    TotalWishlistProduct: number =0
    TotalReturnProduct: number =0
@@ -25,5 +25,4 @@ export class SupplierDeshboardComponent implements OnInit  {
         this.TotalInventory= res.length;
       });
     }
-  
 }

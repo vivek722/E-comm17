@@ -53,7 +53,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
               Action
             </th>
-            <td mat-cell *matCellDef="let element">  </td>
+            <td mat-cell *matCellDef="let element"><i class="bi bi-pencil-fill" (click)="AddProduct(element.id)"></i>&nbsp; &nbsp; &nbsp;<i class="bi bi-trash-fill" (click)="DeleteProduct(element.id)"></i></td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

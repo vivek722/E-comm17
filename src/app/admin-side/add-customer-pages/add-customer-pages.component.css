@@ -59,6 +59,27 @@
     font-weight: 600;
     font-size: 14px;
   }
+  .left p  {
+    border: none;
+    width: 100%; /* Full width */
+    margin: 15px 0;
+    border-bottom: 1px solid #4f30677d;
+    padding: 7px 9px;
+    background: transparent;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .left-toggle {
+    border: none;
+    width: 100%; /* Full width */
+    margin: 15px 0;
+    border-bottom: 1px solid #4f30677d;
+    padding: 7px 9px;
+    background: transparent;
+    font-weight: 600;
+    font-size: 14px;
+  }
   .left select  {
     border: none;
     width: 100%; /* Full width */
@@ -183,6 +204,13 @@
         font-size: 12px; /* Smaller input text */
     }
 
+    .left  p{
+        font-size: 12px; /* Smaller input text */
+    }
+
+    .left-toggle{
+        font-size: 12px;/* Smaller input text */
+    }
     .left select {
       font-size: 12px; /* Smaller input text */
   }

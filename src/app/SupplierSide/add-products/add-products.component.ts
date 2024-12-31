@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../SupplierServices/product.service';
@@ -10,7 +10,7 @@ import { SupplierService } from '../SupplierServices/supplier.service';
   templateUrl: './add-products.component.html',
   styleUrl: './add-products.component.css'
 })
-export class AddProductsComponent {
+export class AddProductsComponent implements OnInit {
 
   supplierData:any
   productForm!: FormGroup;
@@ -26,6 +26,7 @@ export class AddProductsComponent {
       this.supplerservice.GetAllSupplier().subscribe((res:any)=>{
         if(res != null)
         {
+          console.log("response",res)
           this.supplierData = res
         }
       });
@@ -82,5 +83,4 @@ export class AddProductsComponent {
   CloseAddProductDailog() {
     this.dialog.closeAll();
   }   
-
 }
