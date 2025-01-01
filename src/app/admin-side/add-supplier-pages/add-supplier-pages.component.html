@@ -5,9 +5,13 @@
             
             <div class="contact">
                 <form [formGroup]="AddsupplierPageForm">
-                    <h1 class="Dialog-Title">Add Supplier Page</h1><h1 style="display: flex; justify-content: end;"><i class="bi bi-x" (click)="CloseAddSupplierPageDailog()"></i></h1>
-                  
-                    <input type="text" formControlName="PageName" placeholder="Product Name">
+                  <select formControlName="PageName">
+                    <option value="" disabled selected>Select Product</option>
+                    <option *ngFor="let supplierPage of SupplierPagesData" [value]="supplierPage">
+                      {{ supplierPage }}
+                    </option>
+                  </select>
+
                     <p>IsLoderActive
                     <mat-button-toggle-group formControlName="IsLoderActive"  name="fontStyle" aria-label="Font Style">
                       <mat-button-toggle class="left-toggle" value="On">On</mat-button-toggle>

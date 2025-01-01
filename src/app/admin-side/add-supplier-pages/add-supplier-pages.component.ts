@@ -3,14 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AdminSupplierServiceService } from '../Admin-Service/admin-supplier-service.service';
-
+import { SupplierPageNames } from '../../Shared/Enums/SupplierPageNames.Enums';
 @Component({
   selector: 'app-add-supplier-pages',
   templateUrl: './add-supplier-pages.component.html',
   styleUrl: './add-supplier-pages.component.css'
 })
 export class AddSupplierPagesComponent implements OnInit  {
-supplierData:any
+  SupplierPagesData:any[]=[];
+
+
   AddsupplierPageForm!: FormGroup;
   constructor(
     private adminService:AdminSupplierServiceService,
@@ -27,6 +29,8 @@ supplierData:any
         IsTosterActive: [],
         IsDeleteDialogActive:  [],
       });
+      this.SupplierPagesData=Object.keys(SupplierPageNames);
+      console.log(this.SupplierPagesData);
     }
 
     async AddSupplierPage() {

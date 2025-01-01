@@ -16,6 +16,7 @@ import { SharedModule } from "../Shared/shared.module";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { SupplierPagesSettingComponent } from './supplier-pages-setting/supplier-pages-setting.component';
 import { AddSupplierPagesComponent } from './add-supplier-pages/add-supplier-pages.component';
+import { EmailConfigrationComponent } from './email-configration/email-configration.component';
 @NgModule({
   declarations: [
     AddCustomerPagesComponent,
@@ -23,7 +24,8 @@ import { AddSupplierPagesComponent } from './add-supplier-pages/add-supplier-pag
     AdminSideNavbarComponent,
     AdminDeshboardComponent,
     SupplierPagesSettingComponent,
-    AddSupplierPagesComponent
+    AddSupplierPagesComponent,
+    EmailConfigrationComponent
   ],
   imports: [
     CommonModule,
@@ -37,5 +39,6 @@ import { AddSupplierPagesComponent } from './add-supplier-pages/add-supplier-pag
     SharedModule,
     MatButtonToggleModule
   ]
+
 })
 export class AdminSideModule { }

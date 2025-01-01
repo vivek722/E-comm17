@@ -9,7 +9,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteConfirmationDialogComponent } from '../../Shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { AdminSupplierServiceService } from '../../admin-side/Admin-Service/admin-supplier-service.service';
-
+import { SupplierPageNames } from '../../Shared/Enums/SupplierPageNames.Enums';
 @Component({
   selector: 'app-inventory-details',
   templateUrl: './inventory-details.component.html',
@@ -32,13 +32,18 @@ export class InventoryDetailsComponent {
 
   ngOnInit(): void {
     this.displayInventoryData();
+    this.getPageSettingValue();
   }
 
 displayedColumns: string[] = ['Product Image','Product Name','quantity','warehouse Name','location','Action'];
-
+pagename:any;
 
 getPageSettingValue(){
-  // this.pageSettings = this.adminSupplierPageService.
+  this.pagename = SupplierPageNames.Inventory_Details;
+  this.adminSupplierPageService.getAllsupplierPage(this.pagename).subscribe((res:any) => {
+    this.pageSettings = res.data;
+    console.log("pages",this.pageSettings)
+  })
 }
 announceSortChange(sortState: Sort) {
   if (sortState.direction) {

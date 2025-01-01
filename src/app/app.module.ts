@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -11,6 +11,9 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { metaReducers } from './State/Metareducer';
+import { pageConfigSettingReducerF } from './State/Reducer/PageSetting.Reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGmPknD-eJE0nCvtYIs2KLlqLBwrJdF_Y",
@@ -33,6 +36,10 @@ const firebaseConfig = {
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig), // Initialize Firebase
     AngularFireAuthModule,
+    StoreModule.forRoot([], { metaReducers }),
+    StoreModule.forFeature('SupplierPageConfig', pageConfigSettingReducerF),
+    StoreModule.forFeature('CustomerPageConfig', pageConfigSettingReducerF),
+    StoreDevtoolsModule.instrument({}),
     ToastrModule.forRoot({ 
       timeOut: 3000,
       positionClass: 'toast-center-center',
